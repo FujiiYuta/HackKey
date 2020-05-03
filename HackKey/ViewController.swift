@@ -13,17 +13,34 @@ class ViewController: UIViewController {
     @IBOutlet weak var myLabel: UILabel!
     @IBOutlet weak var myButton: UIButton!
     var array : [Int] = []
+    var csvLines = [String]()
     var counter = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         myLabel.text = "????"
-        for i in 0 ... 9999{
-            array.append(i)
-            array.shuffle()
+//        for i in 0 ... 9999{
+//            array.append(i)
+//            array.shuffle()
+//        }
+        guard let path = Bundle.main.path(forResource: "key", ofType: "csv") else{
+            print("CSV file is not found")
+            return
+        }
+        do{
+            let csvString = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
+            csvLines = csvString.components(separatedBy: .newlines)
+            csvLines.removeLast()
+        } catch let error as NSError{
+            print("error: \(error)")
+            return
         }
         
+        for line in csvLines{
+            array.append(Int(line)!)
+        }
+        array.shuffle()
     }
     
     @IBAction func tapButton(_ sender: Any) {
