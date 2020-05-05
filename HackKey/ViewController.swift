@@ -30,7 +30,8 @@ class ViewController: UIViewController {
         }
         do{
             let csvString = try String(contentsOfFile: path, encoding: String.Encoding.utf8)
-            csvLines = csvString.components(separatedBy: .newlines)
+            let lineChange = csvString.replacingOccurrences(of: "\r\n", with: "\n")
+            csvLines = lineChange.components(separatedBy: .newlines)
             csvLines.removeLast()
         } catch let error as NSError{
             print("error: \(error)")
