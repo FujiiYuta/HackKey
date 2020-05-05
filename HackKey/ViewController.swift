@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var myLabel: UILabel!
     @IBOutlet weak var myButton: UIButton!
+    @IBOutlet weak var countLabel: UILabel!
     var array : [Int] = []
     var csvLines = [String]()
     var counter = 0
@@ -20,6 +21,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         myLabel.text = "????"
+        countLabel.text = "0000"
 //        for i in 0 ... 9999{
 //            array.append(i)
 //            array.shuffle()
@@ -62,6 +64,15 @@ class ViewController: UIViewController {
             }
             myLabel.text = randomString
             counter += 1
+            if(counter < 10){
+                countLabel.text = "000" + String(counter)
+            }else if(counter < 100){
+                countLabel.text = "00" + String(counter)
+            }else if(counter < 1000){
+                countLabel.text = "0" + String(counter)
+            }else{
+                countLabel.text = String(counter)
+            }
         }
     }
 }
