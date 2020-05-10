@@ -52,7 +52,11 @@ class ViewController: UIViewController {
             myLabel.text = "finish"
         }else{
             var randomString : String
-            let randomInt = array[counter]
+//            let randomInt = array[counter]
+//            配列の数を変えることになったからcountを配列のポインタとして使う必要はなくなった
+            let randomInt = array[0]
+            array.remove(at: 0)
+            
             if(randomInt < 10){
                 randomString = "000" + String(randomInt)
             }else if(randomInt < 100){
